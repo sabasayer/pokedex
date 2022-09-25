@@ -1,5 +1,5 @@
 <template>
-  <PokemonList />
+  <PokemonList only-favorites />
 </template>
 
 <script lang="ts">
@@ -11,5 +11,5 @@ import PokemonList from "../components/PokemonList.vue";
     PokemonList,
   },
 })
-export default class HomeView extends Vue {}
+export default class FavoritesView extends Vue {}
 </script>

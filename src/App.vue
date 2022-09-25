@@ -1,31 +1,30 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
+    <header>
+      <a href="/">
+        <img class="logo" src="./assets/logo.png" />
+      </a>
+      <a href="/">Home</a>
+      <a href="/favorites">Favorites</a>
+    </header>
     <router-view />
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  & > header {
+    background-color: var(--primary);
+    display: flex;
+    padding: var(--spacing);
+    align-items: center;
+    gap: var(--spacing);
+    .logo {
+      height: 3rem;
     }
   }
 }

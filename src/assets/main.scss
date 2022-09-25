@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+
+:root{
+    --spacing:1rem;
+    --gray:#ededed;
+    --white-hover:#f2f2f2;
+    --white-active:#f0f0f0;
+    --white:#f7f7f7;
+    --primary:steelblue;
+    --secondary:darkorange;
+    --border-radious:.5rem;
+    --border-color:#dddddd;
+}
+
+body,html{
+    padding: 0;
+    margin:0;
+    background-color: var(--gray);
+    font-family: 'Bungee Spice', cursive;
+    font-size: 12px;
+}
+
+a{
+    text-decoration: none;
+}
