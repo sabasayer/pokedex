@@ -29,6 +29,11 @@ yarn test:e2e
 ```
 yarn lint
 ```
+### Dark Theme - Light Theme
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Uses browser preferences. To emulate:
+
+1. Open Developer tools (otherwise the key combination below opens the print dialog)
+2. Open the Command Control: Ctrl+Shift+P or Command+Shift+P (Mac)
+3. Type "Show rendering"
+4. Set the Emulate CSS media feature prefers-color-scheme to the value you want to debug

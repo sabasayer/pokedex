@@ -3,14 +3,27 @@
 :root{
     --spacing:1rem;
     --gray:#ededed;
-    --white-hover:#f2f2f2;
+    --white-hover:#ffffff;
     --white-active:#f0f0f0;
     --white:#f7f7f7;
-    --primary:steelblue;
-    --secondary:darkorange;
+    --primary:#6200ee;
+    --secondary:#03dac6;
     --border-radious:.5rem;
     --border-color:#dddddd;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        --gray:#333333;
+        --white-hover:#131313;
+        --white-active:#151515;
+        --white:#121212;
+        --primary:#bb86fc;
+        --secondary:#03dac6;
+        --border-color:#222222;
+    }
+}
+  
 
 body,html{
     padding: 0;

@@ -1,13 +1,13 @@
 <template>
   <div class="pokemon-list">
     <input placeholder="Search..." v-model="query" />
-    <main>
+    <TransitionGroup name="list" tag="main">
       <PokemonCard
         v-for="pokemon in filteredList"
         :key="pokemon.id"
         :pokemon="pokemon"
       />
-    </main>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -66,12 +66,27 @@ export default class PokemonList extends Vue {
     margin: var(--spacing);
   }
   main {
-    flex: 1;
     overflow: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--spacing);
     padding: var(--spacing);
+  }
+
+  .list-move,
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  .list-leave-active {
+    position: absolute;
   }
 }
 </style>
