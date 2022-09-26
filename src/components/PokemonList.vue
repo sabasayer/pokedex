@@ -41,6 +41,7 @@ export default class PokemonList extends Vue {
 
   async created() {
     const res = await getPokemonList({ limit: 100 });
+
     let list = res.results;
 
     if (this.onlyFavorites)
