@@ -1,15 +1,16 @@
 <template>
   <div class="pokemon-list">
-    <div v-if="loading" class="loading">Loading...</div>
-    <div v-if="error" class="error">{{ error }}</div>
     <input placeholder="Search..." v-model="query" />
-    <TransitionGroup name="list" tag="main">
+    <div v-if="loading" class="loading">Loading...</div>
+    <div v-else-if="error" class="error">{{ error }}</div>
+    <TransitionGroup v-else-if="filteredList.length" name="list" tag="main">
       <PokemonCard
         v-for="pokemon in filteredList"
         :key="pokemon.id"
         :pokemon="pokemon"
       />
     </TransitionGroup>
+    <div v-else class="empty-state">There are no pokemon for your search</div>
   </div>
 </template>
 
