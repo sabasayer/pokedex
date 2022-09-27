@@ -18,3 +18,16 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to select DOM element by data-cy attribute.
+       * @example cy.dataCy('greeting')
+       */
+      interceptPokemonList(pokemonAmount: number): void;
+    }
+  }
+}
