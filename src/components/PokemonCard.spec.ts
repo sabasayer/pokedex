@@ -1,5 +1,5 @@
 import { Pokemon } from "@/service";
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 import PokemonCard from "./PokemonCard.vue";
 
 describe("Pokemon Card Component", () => {
@@ -11,7 +11,7 @@ describe("Pokemon Card Component", () => {
         front_default: "test_url",
       },
     };
-    const wrapper = mount(PokemonCard, {
+    const wrapper = shallowMount(PokemonCard, {
       propsData: { pokemon },
     });
 

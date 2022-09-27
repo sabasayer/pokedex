@@ -32,7 +32,6 @@ class MainModule extends VuexModule {
   @Mutation
   remove(id: number) {
     const index = this.favorites.indexOf(id);
-    console.log(index);
 
     if (!~index) return;
 

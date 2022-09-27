@@ -27,8 +27,6 @@ const mockAllPokemons = (pokemons: Pokemon[]) => {
 };
 
 describe("Pokemon List", () => {
-  beforeEach(() => jest.clearAllMocks());
-
   it("should render element with class", () => {
     mock([]);
     mockAllPokemons([]);
