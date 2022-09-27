@@ -36,6 +36,26 @@ describe("Pokemon List", () => {
     expect(wrapper.element.className).toBe("pokemon-list");
   });
 
+  it("should render loading", () => {
+    mock([]);
+    mockAllPokemons([]);
+
+    const wrapper = shallowMount(PokemonList);
+    expect(wrapper.find(".loading").exists()).toBe(true);
+  });
+
+  it("should render error", async () => {
+    const errorMessage = "error message";
+    (getPokemonList as jest.Mock).mockImplementationOnce(() =>
+      Promise.reject(errorMessage)
+    );
+
+    const wrapper = shallowMount(PokemonList);
+    await flushPromises();
+
+    expect(wrapper.get(".error").exists()).toBe(true);
+  });
+
   it("should render pokemon card components", async () => {
     mock([
       { name: "test", url: "test.url" },

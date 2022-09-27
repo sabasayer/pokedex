@@ -1,5 +1,7 @@
 <template>
   <div class="pokemon">
+    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="error" class="error">{{ error }}</div>
     <h1>
       {{ pokemon.name }}
     </h1>
@@ -49,6 +51,8 @@ export default class PokemonView extends Vue {
     name: "",
     sprites: { front_default: "" },
   };
+  loading = false;
+  error = "";
 
   async created() {
     const id = Number(this.$route.params?.id);
@@ -58,7 +62,16 @@ export default class PokemonView extends Vue {
   }
 
   async getPokemon(id: number) {
-    this.pokemon = await getPokemonWithId(id);
+    this.error = "";
+
+    try {
+      this.loading = true;
+      this.pokemon = await getPokemonWithId(id);
+    } catch (error) {
+      this.error = (error as Error).toString();
+    } finally {
+      this.loading = false;
+    }
   }
 }
 </script>

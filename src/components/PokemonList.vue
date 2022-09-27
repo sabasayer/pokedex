@@ -1,5 +1,7 @@
 <template>
   <div class="pokemon-list">
+    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="error" class="error">{{ error }}</div>
     <input placeholder="Search..." v-model="query" />
     <TransitionGroup name="list" tag="main">
       <PokemonCard
@@ -15,7 +17,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { getPokemonList, getAllPokemons } from "@/service/service";
 import PokemonCard from "../components/PokemonCard.vue";
-import { Pokemon } from "@/service/types";
+import { Pokemon, ServiceListResponse } from "@/service/types";
 import { mainStore } from "@/store/main.module";
 
 @Component({
@@ -28,6 +30,8 @@ export default class PokemonList extends Vue {
 
   pokemons: Pokemon[] = [];
   query = "";
+  error = "";
+  loading = false;
 
   get filteredList() {
     return this.query
@@ -40,16 +44,27 @@ export default class PokemonList extends Vue {
   }
 
   async created() {
-    const res = await getPokemonList({ limit: 100 });
+    this.error = "";
+    try {
+      this.loading = true;
+      const res = await getPokemonList({ limit: 100 });
 
-    let list = res.results;
+      let list = res.results;
 
-    if (this.onlyFavorites)
-      list = list.filter((e) =>
-        this.favorites.some((f) => e.url.endsWith(`/${f}/`))
-      );
+      if (this.onlyFavorites) list = this.filterFavorites(list);
 
-    this.pokemons = await getAllPokemons(list.map((e) => e.url));
+      this.pokemons = await getAllPokemons(list.map((e) => e.url));
+    } catch (error) {
+      this.error = (error as Error).toString();
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  filterFavorites(list: ServiceListResponse["results"]) {
+    return list.filter((e) =>
+      this.favorites.some((f) => e.url.endsWith(`/${f}/`))
+    );
   }
 }
 </script>
